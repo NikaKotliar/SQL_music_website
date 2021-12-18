@@ -56,7 +56,7 @@ connection = engine.connect()
 #         connection.execute(f"INSERT INTO songs (song_name, duration_min_sec, album_id) "
 #                            f"VALUES ('{song_name}', '{duration_in_sec}', '{albom_id}');")
 
-# Заполнение таблицы Autor_Albom
+# Заполнение таблиц многие ко многим
 def Insert_connection_tables(first_table_name, second_table_name, table_for_insert,first_column, second_column):
     min_first_table_ID = connection.execute (f"SELECT MIN(id) FROM {first_table_name};").fetchone()
     max_first_table_ID = connection.execute (f"SELECT MAX(id) FROM {first_table_name};").fetchone()
@@ -81,17 +81,5 @@ def Insert_connection_tables(first_table_name, second_table_name, table_for_inse
 # Insert_connection_tables('songs', 'collections', 'songs_collection', 'songs_id', 'collection_id')
 
 
-# SELECT запросы
-# название и год выхода альбомов, вышедших в 2018 году;
-# print(connection.execute (f"SELECT albom_name, year_ FROM alboms WHERE  year_ = 2018;").fetchall())
-# название и продолжительность самого длительного трека;
-# print(connection.execute (f"SELECT song_name, duration_min_sec FROM songs ORDER BY duration_min_sec DESC ; ").fetchone())
-# название треков, продолжительность которых не менее 3,5 минуты;;
-# print(connection.execute (f"SELECT song_name FROM songs WHERE duration_min_sec >= 210;").fetchall())
-# названия сборников, вышедших в период с 2018 по 2020 год включительно;
-# print(connection.execute (f"SELECT collection_name FROM collections WHERE year_ BETWEEN 2018 AND 2021;").fetchall())
-# исполнители, чье имя состоит из 1 слова;
-# print(connection.execute (f"SELECT name FROM autors WHERE name NOT LIKE '%% %%';").fetchall())
-# название треков, которые содержат слово "мой"/"my".
-# print(connection.execute (f"SELECT song_name FROM songs WHERE song_name LIKE '%%mir%%';").fetchall())
+
 
